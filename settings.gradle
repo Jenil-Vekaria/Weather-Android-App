@@ -1,0 +1,2 @@
+rootProject.name = "Weather-Android-App"
+include ':app'
