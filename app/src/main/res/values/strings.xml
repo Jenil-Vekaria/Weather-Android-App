@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">Weather-Android-App</string>
+    <string name="app_name">Weather Android App</string>
+    <string name="today">Today</string>
+    <string name="next_7_days">Next 7 Days</string>
+
+    <string name="sunday">Sun</string>
+    <string name="monday">Mon</string>
+    <string name="tuesday">Tue</string>
+    <string name="wednesday">Wed</string>
+    <string name="thursday">Thu</string>
+    <string name="friday">Fri</string>
+    <string name="saturday">Sat</string>
 </resources>
