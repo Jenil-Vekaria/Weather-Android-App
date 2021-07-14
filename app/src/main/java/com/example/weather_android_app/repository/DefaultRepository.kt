@@ -5,6 +5,7 @@ import com.example.weather_android_app.data.api.WeatherApi
 import com.example.weather_android_app.data.model.Location
 import com.example.weather_android_app.data.model.WeatherResponse
 import com.example.weather_android_app.util.Resource
+import com.example.weather_android_app.util.ResourceList
 import javax.inject.Inject
 
 class DefaultRepository @Inject constructor(
@@ -27,19 +28,19 @@ class DefaultRepository @Inject constructor(
         }
     }
 
-    override suspend fun getLocationList(name: String): Resource<Location> {
+    override suspend fun getLocationList(name: String): ResourceList<Location> {
         return try {
             val response = locationApi.getLocation(name)
             val result = response.body()
 
             if(response.isSuccessful && result != null){
-                return Resource.Success(result)
+                return ResourceList.Success(result)
             }
             else{
-                Resource.Error(response.message())
+                ResourceList.Error(response.message())
             }
         }catch (e: Exception){
-            Resource.Error(e.message ?: "An error occurred")
+            ResourceList.Error(e.message ?: "An error occurred")
         }
     }
 }
