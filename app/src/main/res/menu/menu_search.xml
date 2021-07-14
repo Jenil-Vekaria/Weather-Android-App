@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_location_search"
+        android:icon="@drawable/ic_search"
+        android:title="@string/search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        android:iconifiedByDefault="false"
+        app:showAsAction="always|collapseActionView" />
+    <item
+        android:id="@+id/menu_celsius"
+        android:title="@string/celsius"
+        android:checkable="true"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_fahrenheit"
+        android:title="@string/fahrenheit"
+        android:checkable="true"
+        app:showAsAction="never" />
+</menu>

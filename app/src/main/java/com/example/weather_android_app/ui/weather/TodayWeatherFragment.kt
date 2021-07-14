@@ -1,11 +1,15 @@
 package com.example.weather_android_app.ui.weather
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.RequestManager
 import com.example.weather_android_app.R
@@ -87,6 +91,32 @@ class TodayWeatherFragment : Fragment(R.layout.fragment_today_weather) {
                     }
                 }
             }
+        }
+
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_search,menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.menu_location_search -> {
+                val action = TodayWeatherFragmentDirections.actionTodayWeatherFragmentToLocationSearchFragment()
+                findNavController().navigate(action)
+                return true
+            }
+            R.id.menu_celsius -> {
+
+                return true
+
+            }
+            R.id.menu_fahrenheit -> {
+
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }
