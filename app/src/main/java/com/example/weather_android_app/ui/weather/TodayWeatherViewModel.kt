@@ -2,12 +2,9 @@ package com.example.weather_android_app.ui.weather
 
 import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.weather_android_app.data.WeatherResponse
-import com.example.weather_android_app.repository.DefaultRepository
+import com.example.weather_android_app.data.model.WeatherResponse
 import com.example.weather_android_app.repository.MainRepository
 import com.example.weather_android_app.util.Resource
 import kotlinx.coroutines.flow.MutableStateFlow

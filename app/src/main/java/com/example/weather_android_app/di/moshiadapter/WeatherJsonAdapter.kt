@@ -1,6 +1,6 @@
 package com.example.weather_android_app.di.moshiadapter
 
-import com.example.weather_android_app.data.Temperature
+import com.example.weather_android_app.data.model.Temperature
 import com.squareup.moshi.*
 
 class WeatherJsonAdapter {
@@ -10,9 +10,8 @@ class WeatherJsonAdapter {
         return when (jsonValue) {
             is Double -> Temperature(jsonValue)
             else -> {
-                val weatherResponse = jsonValue as Map<String, Any?>
-                val temperature = weatherResponse["temp"] as Map<String, Double?>
-                Temperature(temperature["day"]!!)
+                val temperatureResponse = jsonValue as Map<String, Double?>
+                Temperature(temperatureResponse["day"]!!)
             }
         }
     }

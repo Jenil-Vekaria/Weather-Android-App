@@ -1,21 +1,23 @@
-package com.example.weather_android_app.data
+package com.example.weather_android_app.data.model
 
 import com.squareup.moshi.Json
 
 data class WeatherResponse(
     val current: CurrentWeather,
     val hourly: List<CurrentWeather>,
-    val daily: List<Temperature>
+    val daily: List<CurrentWeather>
 )
 
 data class CurrentWeather(
     @Json(name="temp") val temperature: Temperature,
     @Json(name="wind_speed") val windSpeed: Double,
     @Json(name="weather") val weatherInfo: List<Weather>,
+    @Json(name="dt") val datetime: Long,
     val humidity: Int,
 )
 
 data class Weather(
+    val main: String,
     val description: String,
     val icon: String
 )

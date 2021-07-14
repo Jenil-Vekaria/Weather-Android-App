@@ -97,13 +97,29 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/current_day_weather_recyclerview"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_centerVertical="true"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        tools:listitem="@layout/single_weather_day_item" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <RelativeLayout
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/purple_500">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/purple_500"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

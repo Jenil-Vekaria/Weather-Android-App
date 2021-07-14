@@ -1,5 +1,6 @@
 package com.example.weather_android_app.data
 
+import com.example.weather_android_app.data.model.WeatherResponse
 import retrofit2.Response
 import retrofit2.http.GET
 

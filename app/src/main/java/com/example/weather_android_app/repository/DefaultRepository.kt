@@ -1,7 +1,7 @@
 package com.example.weather_android_app.repository
 
 import com.example.weather_android_app.data.WeatherApi
-import com.example.weather_android_app.data.WeatherResponse
+import com.example.weather_android_app.data.model.WeatherResponse
 import com.example.weather_android_app.util.Resource
 import javax.inject.Inject
 

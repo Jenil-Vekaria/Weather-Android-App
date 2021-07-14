@@ -1,35 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/rounder_corner"
-    android:padding="16dp"
-    android:layout_margin="8dp">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="8dp">
 
-    <TextView
-        android:id="@+id/weather_day"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/saturday"
-        android:textSize="18sp"
-        android:textColor="@color/white"/>
+        android:background="@drawable/rounder_corner"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/weather_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_centerHorizontal="true"
+            tools:text="Sat"/>
 
 
-    <ImageView
-        android:id="@+id/weather_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_cloud_queue_24"
-        android:importantForAccessibility="no" />
+        <ImageView
+            android:id="@+id/weather_icon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:importantForAccessibility="no"
+            android:layout_below="@id/weather_day"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_baseline_cloud_queue_24"/>
 
-    <TextView
-        android:id="@+id/weather_temperature"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="29°"
-        android:textSize="18sp"
-        android:textColor="@color/white"
-        android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/weather_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:layout_centerHorizontal="true"
+            tools:text="Cloudy"
+            android:layout_below="@id/weather_icon"/>
+
+        <TextView
+            android:id="@+id/weather_temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_below="@id/weather_description"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+
+
 </LinearLayout>
