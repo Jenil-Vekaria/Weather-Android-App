@@ -4,7 +4,9 @@ import android.content.Context
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
-import com.example.weather_android_app.data.WeatherApi
+import com.example.weather_android_app.data.api.LocationApi
+import com.example.weather_android_app.data.api.WeatherApi
+import com.example.weather_android_app.data.model.Location
 import com.example.weather_android_app.di.moshiadapter.WeatherJsonAdapter
 import com.example.weather_android_app.repository.DefaultRepository
 import com.example.weather_android_app.repository.MainRepository
@@ -45,11 +47,12 @@ class AppModule {
     //Reference fro MetaWeatherAPI
     @Singleton
     @Provides
-    fun provideMetaWeatherAPI(moshi: Moshi) =
+    fun provideMetaWeatherAPI(moshi: Moshi): LocationApi =
         Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .baseUrl(Constants.META_WEATHER_API)
             .build()
+            .create(LocationApi::class.java)
 
     @Singleton
     @Provides
@@ -62,6 +65,7 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideDefaultRepository(api: WeatherApi): MainRepository = DefaultRepository(api)
+    fun provideDefaultRepository(weatherApi: WeatherApi,
+                                 locationApi: LocationApi): MainRepository = DefaultRepository(weatherApi,locationApi)
 
 }
