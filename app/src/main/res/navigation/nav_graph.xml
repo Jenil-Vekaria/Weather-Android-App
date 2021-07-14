@@ -8,7 +8,7 @@
         android:id="@+id/todayWeatherFragment"
         android:name="com.example.weather_android_app.ui.weather.TodayWeatherFragment"
         android:label="fragement_current_weather"
-        tools:layout="@layout/fragement_current_weather" >
+        tools:layout="@layout/fragment_today_weather" >
         <action
             android:id="@+id/action_todayWeatherFragment_to_locationSearchFragment"
             app:destination="@id/locationSearchFragment" />
