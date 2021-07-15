@@ -71,6 +71,10 @@ class TodayWeatherFragment : Fragment(R.layout.fragment_today_weather) {
                     }
                     is TodayWeatherViewModel.WeatherEvent.Loading -> {
                         binding.loading.visibility = View.VISIBLE
+
+                        val mainActivity = activity as AppCompatActivity
+                        mainActivity.supportActionBar?.title = viewModel.currentCity
+
                     }
                     is TodayWeatherViewModel.WeatherEvent.Success -> {
                         binding.loading.visibility = View.GONE
@@ -85,8 +89,6 @@ class TodayWeatherFragment : Fragment(R.layout.fragment_today_weather) {
                             "${round(weatherData.current.windSpeed).toInt()} km/h"
                         val weatherHumidity = "${weatherData.current.humidity}%"
 
-                        val mainActivity = activity as AppCompatActivity
-                        mainActivity.supportActionBar?.title = viewModel.currentCity
 
                         binding.apply {
                             glide.load(Constants.OPEN_WEATHER_ICON + "$weatherIcon@2x.png")
