@@ -1,7 +1,6 @@
 package com.example.weather_android_app.ui.weather
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -17,6 +16,7 @@ import com.example.weather_android_app.R
 import com.example.weather_android_app.adapter.WeekWeatherAdapter
 import com.example.weather_android_app.data.model.Location
 import com.example.weather_android_app.databinding.FragmentTodayWeatherBinding
+import com.example.weather_android_app.ui.location.QUERY_LOCATION
 import com.example.weather_android_app.util.Constants
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_today_weather.*
@@ -49,7 +49,7 @@ class TodayWeatherFragment : Fragment(R.layout.fragment_today_weather) {
         }
 
         val navController = findNavController()
-        navController.currentBackStackEntry?.savedStateHandle?.getLiveData<Location>("location")
+        navController.currentBackStackEntry?.savedStateHandle?.getLiveData<Location>(QUERY_LOCATION)
             ?.observe(viewLifecycleOwner) { location ->
                 val coordinateList = location.coordinate.split(",")
                 val lat = coordinateList[0]
@@ -99,8 +99,8 @@ class TodayWeatherFragment : Fragment(R.layout.fragment_today_weather) {
                         }
 
                         //Remove the first item - Current Day Weather
-                        val sevenDayForcast = weatherData.daily.subList(1, 8)
-                        weatherAdapter.submitList(sevenDayForcast)
+                        val sevenDayForecast = weatherData.daily.subList(1, 8)
+                        weatherAdapter.submitList(sevenDayForecast)
 
                     }
                 }

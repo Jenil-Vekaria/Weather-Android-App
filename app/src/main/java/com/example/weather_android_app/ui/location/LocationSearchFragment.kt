@@ -18,6 +18,8 @@ import com.example.weather_android_app.databinding.FragmentLocationSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
+const val QUERY_LOCATION = "com.example.weather_android_app.ui.location.QUERY_LOCATION"
+
 @AndroidEntryPoint
 class LocationSearchFragment: Fragment(R.layout.fragment_location_search), LocationAdapter.OnItemClickListener{
 
@@ -69,13 +71,13 @@ class LocationSearchFragment: Fragment(R.layout.fragment_location_search), Locat
 
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
+                if(!query.isNullOrEmpty()){
+                    viewModel.getLocationList(query)
+                }
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                if(!newText.isNullOrEmpty()){
-                    viewModel.getLocationList(newText)
-                }
                 return true
             }
 
@@ -85,8 +87,9 @@ class LocationSearchFragment: Fragment(R.layout.fragment_location_search), Locat
 
     override fun onLocationClick(location: Location) {
         searchItem.collapseActionView()
+
         val navController = findNavController()
-        navController.previousBackStackEntry?.savedStateHandle?.set("location", location)
+        navController.previousBackStackEntry?.savedStateHandle?.set(QUERY_LOCATION, location)
         navController.popBackStack()
     }
 }
