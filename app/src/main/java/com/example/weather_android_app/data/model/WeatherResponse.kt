@@ -3,6 +3,7 @@ package com.example.weather_android_app.data.model
 import com.squareup.moshi.Json
 
 data class WeatherResponse(
+    val timezone: String,
     val current: CurrentWeather,
     val daily: List<CurrentWeather>
 )

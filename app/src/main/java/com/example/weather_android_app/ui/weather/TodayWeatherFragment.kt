@@ -1,6 +1,7 @@
 package com.example.weather_android_app.ui.weather
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.RequestManager
 import com.example.weather_android_app.R
 import com.example.weather_android_app.adapter.WeekWeatherAdapter
+import com.example.weather_android_app.data.model.Location
 import com.example.weather_android_app.databinding.FragmentTodayWeatherBinding
 import com.example.weather_android_app.util.Constants
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,6 +48,18 @@ class TodayWeatherFragment : Fragment(R.layout.fragment_today_weather) {
             }
         }
 
+        val navController = findNavController()
+        navController.currentBackStackEntry?.savedStateHandle?.getLiveData<Location>("location")
+            ?.observe(viewLifecycleOwner) { location ->
+                val coordinateList = location.coordinate.split(",")
+                val lat = coordinateList[0]
+                val lon = coordinateList[1]
+
+                viewModel.currentCity = location.title
+                viewModel.getWeatherData(lat,lon)
+            }
+
+
         lifecycleScope.launchWhenStarted {
             viewModel.weatherData.collect { event ->
                 when (event) {
@@ -72,7 +86,7 @@ class TodayWeatherFragment : Fragment(R.layout.fragment_today_weather) {
                         val weatherHumidity = "${weatherData.current.humidity}%"
 
                         val mainActivity = activity as AppCompatActivity
-                        mainActivity.supportActionBar?.title = "Toronto, Canada"
+                        mainActivity.supportActionBar?.title = viewModel.currentCity
 
                         binding.apply {
                             glide.load(Constants.OPEN_WEATHER_ICON + "$weatherIcon@2x.png")
@@ -97,13 +111,14 @@ class TodayWeatherFragment : Fragment(R.layout.fragment_today_weather) {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_search,menu)
+        inflater.inflate(R.menu.menu_search, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
+        return when (item.itemId) {
             R.id.menu_location_search -> {
-                val action = TodayWeatherFragmentDirections.actionTodayWeatherFragmentToLocationSearchFragment()
+                val action =
+                    TodayWeatherFragmentDirections.actionTodayWeatherFragmentToLocationSearchFragment()
                 findNavController().navigate(action)
                 return true
             }
