@@ -15,6 +15,7 @@ import com.example.weather_android_app.R
 import com.example.weather_android_app.adapter.LocationAdapter
 import com.example.weather_android_app.data.model.Location
 import com.example.weather_android_app.databinding.FragmentLocationSearchBinding
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -45,7 +46,10 @@ class LocationSearchFragment: Fragment(R.layout.fragment_location_search), Locat
             viewModel.locationList.collect { event ->
                 when(event){
                     is LocationSearchViewModel.LocationEvent.Empty -> binding.loading.visibility = View.GONE
-                    is LocationSearchViewModel.LocationEvent.Error -> binding.loading.visibility = View.GONE
+                    is LocationSearchViewModel.LocationEvent.Error -> {
+                        Snackbar.make(binding.root,event.message, Snackbar.LENGTH_LONG).show()
+                        binding.loading.visibility = View.VISIBLE
+                    }
                     is LocationSearchViewModel.LocationEvent.Loading -> binding.loading.visibility = View.GONE
                     is LocationSearchViewModel.LocationEvent.Success -> {
                         binding.loading.visibility = View.GONE

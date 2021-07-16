@@ -12,6 +12,7 @@
         android:id="@+id/menu_celsius"
         android:title="@string/celsius"
         android:checkable="true"
+        android:checked="true"
         app:showAsAction="never" />
 
     <item

@@ -6,13 +6,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weather_android_app.data.model.Location
 import com.example.weather_android_app.repository.MainRepository
+import com.example.weather_android_app.util.Network
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 
 class LocationSearchViewModel @ViewModelInject constructor(
-    private val repository: MainRepository
+    private val repository: MainRepository,
+    private val network: Network
 ) : ViewModel() {
 
     sealed class LocationEvent() {
@@ -30,9 +32,15 @@ class LocationSearchViewModel @ViewModelInject constructor(
     }
 
     fun getLocationList(name: String) = viewModelScope.launch {
-        _locationList.value = LocationEvent.Loading
 
-        val result = repository.getLocationList(name)
-        _locationList.value = LocationEvent.Success(result.data!!)
+        if(!network.isNetworkAvailable()){
+            _locationList.value = LocationEvent.Error("No Internet Connection")
+        }
+        else{
+            _locationList.value = LocationEvent.Loading
+
+            val result = repository.getLocationList(name)
+            _locationList.value = LocationEvent.Success(result.data!!)
+        }
     }
 }

@@ -18,6 +18,7 @@ import com.example.weather_android_app.data.model.Location
 import com.example.weather_android_app.databinding.FragmentTodayWeatherBinding
 import com.example.weather_android_app.ui.location.QUERY_LOCATION
 import com.example.weather_android_app.util.Constants
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_today_weather.*
 import kotlinx.coroutines.flow.collect
@@ -67,7 +68,7 @@ class TodayWeatherFragment : Fragment(R.layout.fragment_today_weather) {
                         binding.loading.visibility = View.VISIBLE
                     }
                     is TodayWeatherViewModel.WeatherEvent.Error -> {
-
+                        Snackbar.make(binding.root,event.message,Snackbar.LENGTH_LONG).show()
                     }
                     is TodayWeatherViewModel.WeatherEvent.Loading -> {
                         binding.loading.visibility = View.VISIBLE
