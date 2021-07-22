@@ -36,6 +36,8 @@ class TodayWeatherFragment : Fragment(R.layout.fragment_today_weather) {
     @Inject
     lateinit var weatherAdapter: WeekWeatherAdapter
 
+    lateinit var menu: Menu
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -57,7 +59,9 @@ class TodayWeatherFragment : Fragment(R.layout.fragment_today_weather) {
                 val lon = coordinateList[1]
 
                 viewModel.currentCity = location.title
-                viewModel.getWeatherData(lat,lon)
+                viewModel.lat = lat
+                viewModel.lon = lon
+                viewModel.getWeatherData()
             }
 
 
@@ -114,6 +118,7 @@ class TodayWeatherFragment : Fragment(R.layout.fragment_today_weather) {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        this.menu = menu
         inflater.inflate(R.menu.menu_search, menu)
     }
 
@@ -126,12 +131,15 @@ class TodayWeatherFragment : Fragment(R.layout.fragment_today_weather) {
                 return true
             }
             R.id.menu_celsius -> {
-
+                viewModel.getWeatherData("metric")
+                item.setChecked(true)
+                menu.findItem(R.id.menu_fahrenheit).setChecked(false)
                 return true
-
             }
             R.id.menu_fahrenheit -> {
-
+                viewModel.getWeatherData("imperial")
+                item.setChecked(true)
+                menu.findItem(R.id.menu_celsius).setChecked(false)
                 return true
             }
             else -> super.onOptionsItemSelected(item)

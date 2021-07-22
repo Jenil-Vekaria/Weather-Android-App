@@ -13,9 +13,9 @@ class DefaultRepository @Inject constructor(
     private val locationApi: LocationApi
 ): MainRepository {
 
-    override suspend fun getWeatherInfo(lat: String, lon: String): Resource<WeatherResponse> {
+    override suspend fun getWeatherInfo(lat: String, lon: String, units: String): Resource<WeatherResponse> {
         return try {
-            val response = weatherApi.getWeatherInformation(lat,lon)
+            val response = weatherApi.getWeatherInformation(lat,lon,units)
             val result = response.body()
 
             if(response.isSuccessful && result != null){

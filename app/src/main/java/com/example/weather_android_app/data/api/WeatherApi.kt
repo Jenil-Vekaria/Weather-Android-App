@@ -7,10 +7,11 @@ import retrofit2.http.Query
 
 interface WeatherApi {
 
-    @GET("data/2.5/onecall?exclude=minutely,hourly,alerts&units=metric&appid=d875a99a411c3c52d45d763ae33e6bd9")
+    @GET("data/2.5/onecall?exclude=minutely,hourly,alerts&appid=d875a99a411c3c52d45d763ae33e6bd9")
     suspend fun getWeatherInformation(
         @Query("lat") lat: String,
-        @Query("lon") long: String
+        @Query("lon") long: String,
+        @Query("units") units: String
     ): Response<WeatherResponse>
 
 }
