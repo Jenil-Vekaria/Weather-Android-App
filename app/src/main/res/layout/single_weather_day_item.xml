@@ -31,8 +31,7 @@
             android:layout_gravity="center"
             android:importantForAccessibility="no"
             android:layout_below="@id/weather_day"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/ic_baseline_cloud_queue_24"/>
+            android:layout_centerHorizontal="true"/>
 
         <TextView
             android:id="@+id/weather_description"
