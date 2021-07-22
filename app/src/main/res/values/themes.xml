@@ -21,4 +21,9 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:fontFamily">@font/roboto_medium</item>
     </style>
+
+    <style name="splashScreenTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_image</item>
+        <item name="android:statusBarColor">@color/purple_500</item>
+    </style>
 </resources>
